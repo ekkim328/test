@@ -1,14 +1,8 @@
-from fastapi import FastAPI, Query, Path, Depends, HTTPException
-from pydantic import BaseModel, EmailStr, Field, model_validator
-from sqlalchemy import create_engine, ForeignKey, text, Column, Integer, String, Boolean, DateTime
+from fastapi import FastAPI, Query, Depends, HTTPException
+from pydantic import BaseModel, Field
+from sqlalchemy import create_engine, ForeignKey, Column, Integer, String
 from sqlalchemy.pool import QueuePool
-from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import declarative_base, Session
-from datetime import datetime
-from typing import Optional
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-import jwt
-import datetime
 
 app=FastAPI()
 
@@ -16,8 +10,6 @@ app=FastAPI()
 DATABASE_CONN = "mysql+mysqlconnector://root:1234@127.0.0.1:3306/board"
 engine=create_engine(DATABASE_CONN, poolclass=QueuePool)
 Base=declarative_base()
-
-
 
 #DB모델링
 class Student(Base):
